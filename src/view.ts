@@ -1,6 +1,6 @@
-import { TILE_STATUSES } from "./model";
+import { checkWin, checkLose, TILE_STATUSES } from "./model";
 import { Tile } from "./components/Tile";
-import { revealTile } from "./controller";
+import { addListeners } from "./controller";
 
 export function displayBoard(board: Array<Array<Tile>>): void {
   const boardDiv = document.getElementById("board");
@@ -19,17 +19,7 @@ export function displayBoard(board: Array<Array<Tile>>): void {
   });
 }
 
-function addListeners(board: Array<Array<Tile>>, element: HTMLElement, tile: Tile): void {
-  element.addEventListener("click", () => {
-    revealTile(board, tile);
-  });
-  element.addEventListener("contextmenu", e => {
-    e.preventDefault();
-    markTile(element);
-  });
-}
-
-function markTile(element: HTMLElement) {
+export function markTile(element: HTMLElement): void {
   const status = element.dataset.status;
   // if the tile is neither hidden nor marked, i.e., if it's been revealed, return
   if (
@@ -44,4 +34,29 @@ function markTile(element: HTMLElement) {
   } else {
     element.dataset.status = TILE_STATUSES.MARKED;
   }
+}
+
+export function checkEnd(board: Array<Array<Tile>>, tile: Tile): void {
+  const boardElement = document.getElementById("board");
+  const subtext = document.getElementById("subtext") ?? document.createElement("div");
+  const lose = checkLose(tile);
+  const win = checkWin(board);
+
+  if (win || lose) {
+    boardElement?.addEventListener("click", stopProp, {capture: true});
+    boardElement?.addEventListener("contextmenu", stopProp, {capture: true});
+  }
+
+  if (win) {
+    subtext.textContent = "You win!";
+  }
+
+  if (lose) {
+    subtext.textContent = "You lose...";
+  }
+}
+
+// Makes it so that no more listeners are called
+function stopProp(e: Event): void {
+  e.stopImmediatePropagation();
 }
