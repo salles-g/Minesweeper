@@ -55,3 +55,26 @@ function getMinePositions(size: number, mines: number) {
 function positionMatch(a: any, b: any): boolean {
   return a.x === b.x && a.y === b.y;
 }
+
+export function checkWin(board: Array<Array<Tile>>): boolean {
+  let revealedTiles = 0;
+  let numberOfTiles = 0;
+
+  // check if every safe tile is revealed
+  board.forEach(row => {
+    row.forEach(tile => {
+      if (tile.status !== TILE_STATUSES.MINE) {
+        if (tile.element.dataset.status === TILE_STATUSES.NUMBER) {
+          revealedTiles++;
+        }
+        numberOfTiles++;
+      }
+    });
+  });
+
+  return revealedTiles === numberOfTiles;
+}
+
+export function checkLose(tile: Tile): boolean {
+  return tile.status === TILE_STATUSES.MINE;
+}
