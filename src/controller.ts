@@ -1,8 +1,12 @@
 import { TILE_STATUSES } from "./model";
 import { Tile } from "./components/Tile";
+import { checkEnd, markTile } from "./view";
 
 export function revealTile(board: Array<Array<Tile>>, tile: Tile): void {
   const element = tile.element;
+
+  // if tile is marked
+  if (element.dataset.status === TILE_STATUSES.MARKED) return;
 
   // if tile is not hidden
   if (element.dataset.status !== TILE_STATUSES.HIDDEN) return;
@@ -11,7 +15,7 @@ export function revealTile(board: Array<Array<Tile>>, tile: Tile): void {
   if (tile.status === TILE_STATUSES.MINE) {
     alert("BOOM!");
     element.dataset.status = TILE_STATUSES.MINE;
-    return;
+    return checkEnd(board, tile);
   }
 
   element.dataset.status = TILE_STATUSES.NUMBER;
@@ -27,6 +31,8 @@ export function revealTile(board: Array<Array<Tile>>, tile: Tile): void {
   else {
     adjacentTiles.forEach(tile => revealTile(board, tile));
   }
+
+  checkEnd(board, tile);
 }
 
 // check tiles in a 3x3 area, with the given tile as the center
@@ -42,4 +48,15 @@ function nearbyTiles(board: Array<Array<Tile>>, tile: Tile): Array<Tile> {
   }
 
   return tiles;
+}
+
+// add event listeners to the given tile
+export function addListeners(board: Array<Array<Tile>>, element: HTMLElement, tile: Tile): void {
+  element.addEventListener("click", () => {
+    revealTile(board, tile);
+  });
+  element.addEventListener("contextmenu", e => {
+    e.preventDefault();
+    markTile(element);
+  });
 }
