@@ -11,15 +11,13 @@ export function createBoard(size: number, mines: number): Array<Array<Tile>> {
   const minePositions = getMinePositions(size, mines);
   const board: Array<Array<Tile>> = [];
 
-  // Create rows
-  for (let y = 0; y < size; y++) {
+  for (let rowPosition = 0; rowPosition < size; rowPosition++) {
     const row: Array<Tile> = [];
-    // Create tiles
-    for (let x = 0; x < size; x++) {
-      const tile = new Tile(x, y);
+    for (let tilePosition = 0; tilePosition < size; tilePosition++) {
+      const tile = new Tile(tilePosition, rowPosition);
 
       // if the tile's position is in the minePositions array
-      if (minePositions.some(p => positionMatch(p, {x, y}))) {
+      if (minePositions.some(p => positionMatch(p, {tilePosition, rowPosition}))) {
         tile.status = TILE_STATUSES.MINE;
       }
 
