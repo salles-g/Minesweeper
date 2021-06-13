@@ -13,7 +13,6 @@ export function revealTile(board: Array<Array<Tile>>, tile: Tile): void {
   
   // if given tile is a mine
   if (tile.status === TILE_STATUSES.MINE) {
-    alert("BOOM!");
     element.dataset.status = TILE_STATUSES.MINE;
     return checkEnd(board, tile);
   }
