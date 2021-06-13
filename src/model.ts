@@ -8,6 +8,8 @@ export const TILE_STATUSES = {
 };
 
 export function createBoard(size: number, mines: number): Array<Array<Tile>> {
+  if (mines >= size*size) throw new Error("Too many mines.");
+
   const minePositions = getMinePositions(size, mines);
   const board: Array<Array<Tile>> = [];
 
