@@ -1,4 +1,4 @@
-import { Tile } from "./components/Tile";
+import { Tile } from "./components/Tile.js";
 
 export const TILE_STATUSES = {
   HIDDEN: "hidden",
@@ -13,10 +13,10 @@ export function createBoard(size: number, mines: number): Array<Array<Tile>> {
   const minePositions = getMinePositions(size, mines);
   const board: Array<Array<Tile>> = [];
 
-  // Create rows
+  // Create rows (y position)
   for (let y = 0; y < size; y++) {
     const row: Array<Tile> = [];
-    // Create tiles
+    // Create tiles (x position)
     for (let x = 0; x < size; x++) {
       const tile = new Tile(x, y);
 

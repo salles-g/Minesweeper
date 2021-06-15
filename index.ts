@@ -1,5 +1,5 @@
-import { displayBoard } from "./src/view";
-import { createBoard } from "./src/model";
+import { displayBoard } from "./src/view.js";
+import { createBoard } from "./src/model.js";
 
 const BOARD_SIZE = 10;
 const NUMBER_OF_MINES = 15;

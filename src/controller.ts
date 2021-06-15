@@ -1,6 +1,6 @@
-import { TILE_STATUSES } from "./model";
-import { Tile } from "./components/Tile";
-import { checkEnd, markTile } from "./view";
+import { TILE_STATUSES } from "./model.js";
+import { Tile } from "./components/Tile.js";
+import { checkEnd, markTile } from "./view.js";
 
 export function revealTile(board: Array<Array<Tile>>, tile: Tile): void {
   const element = tile.element;

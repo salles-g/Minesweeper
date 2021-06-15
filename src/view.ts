@@ -1,6 +1,6 @@
-import { checkWin, checkLose, TILE_STATUSES } from "./model";
-import { Tile } from "./components/Tile";
-import { addListeners } from "./controller";
+import { checkWin, checkLose, TILE_STATUSES } from "./model.js";
+import { Tile } from "./components/Tile.js";
+import { addListeners } from "./controller.js";
 
 export function displayBoard(board: Array<Array<Tile>>): void {
   const boardDiv = document.getElementById("board");

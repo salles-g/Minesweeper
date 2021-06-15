@@ -1,4 +1,4 @@
-import { TILE_STATUSES } from "../model";
+import { TILE_STATUSES } from "../model.js";
 
 export class Tile {
   public x: number;
