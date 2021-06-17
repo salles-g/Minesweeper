@@ -69,20 +69,12 @@ body {
   border: 1px solid #777;
 }
 #board > [data-status="mine"] {
-  background-color: red;
+  background: red url("./icons/bomb.svg") no-repeat center center;
+  background-size: contain;
+
   border: 1px solid #777;
 }
 #board > [data-status="marked"] {
-  background-color: yellow;
-}
-
-/* "placeholder" while I don't add actual icons */
-#board > [data-status="marked"]::after {
-  content: "!";
-  transform: translate(-140%, 0);
-}
-#board > [data-status="mine"]::after {
-  content: "💣";
-  font-size: .75em;
-  transform: translate(-45%, -5%);
+  background: url("./icons/flag.svg") no-repeat center center;
+  background-size: contain;
 }
