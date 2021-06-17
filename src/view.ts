@@ -41,7 +41,7 @@ export function markTile(element: HTMLElement): void {
 
 export function checkEnd(board: Array<Array<Tile>>, tile: Tile): void {
   const boardElement = document.getElementById("board");
-  const subtext = document.getElementById("subtext") ?? document.createElement("div");
+  const counter = document.getElementById("counter") ?? document.createElement("div");
   const lose = checkLose(tile);
   const win = checkWin(board);
 
@@ -51,11 +51,11 @@ export function checkEnd(board: Array<Array<Tile>>, tile: Tile): void {
   }
 
   if (win) {
-    subtext.textContent = "You win!";
+    counter.textContent = "You win!";
   }
 
   if (lose) {
-    subtext.textContent = "You lose...";
+    counter.textContent = "You lose...";
   }
 }
 
