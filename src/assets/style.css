@@ -1,38 +1,77 @@
-#board {
-  max-width: 331px;
+* {
+  box-sizing: border-box;
 }
 
-.tile {
-  display: inline-block;
-  margin: 1px;
-  width: 30px;
-  height: 30px;
-  background-color: cadetblue;
+body {
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #EEE;
+
+  font-family: sans-serif;
+  font-size: 3rem;
+  color: #222;
+}
+
+.title {
+  margin: 20px 0 0 0;
+}
+
+#counter {
+  color: #333;
+  font-size: 1.5rem;
+  margin: 20px;
+}
+
+#board {
+  display: inline-grid;
+  grid-template-columns: repeat(var(--size), 25px);
+  grid-template-rows: repeat(var(--size), 25px);
+
+  border: 5px solid #777;
+  background: #BBB;
 }
 
 #board > * {
-  max-width: 100%;
-  max-height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  vertical-align: center;
+
+  width: 100%;
+  height: 100%;
+
+  font-weight: bold;
+  font-size: 50%;
   user-select: none;
+
+  border-width: 3.5px;
+  border-style: solid;
+  border-color: #FFF #777 #777 #FFF;
 }
+
+/* Change text color according to the number of mines nearby */
+#board > [data-nearby="1"] { color: blue; }
+#board > [data-nearby="2"] { color: green; }
+#board > [data-nearby="3"] { color: red; }
+#board > [data-nearby="4"] { color: darkblue; }
+#board > [data-nearby="5"] { color: darkred; }
+#board > [data-nearby="6"] { color: teal; }
+#board > [data-nearby="7"] { color: black; }
+#board > [data-nearby="8"] { color: gray; }
 
 #board > [data-status="hidden"] {
-  background-color: #BBB;
   cursor: pointer;
 }
-
+#board > [data-status="number"] {
+  border: 1px solid #777;
+}
 #board > [data-status="mine"] {
   background-color: red;
+  border: 1px solid #777;
 }
-
-#board > [data-status="number"] {
-  background-color: none;
-}
-
 #board > [data-status="marked"] {
   background-color: yellow;
 }
