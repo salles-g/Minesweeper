@@ -25,6 +25,7 @@ export function revealTile(board: Array<Array<Tile>>, tile: Tile): void {
   // set the number on the tile to the amount of mines nearby, if there are any
   if (nearbyMines.length !== 0) {
     element.textContent = String(nearbyMines.length);
+    element.dataset.nearby = String(nearbyMines.length);
   }
   // if there aren't, call this function again for each of the adjacent tiles
   else {
