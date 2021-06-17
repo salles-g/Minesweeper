@@ -1,0 +1,29 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "Simple minesweeper game with TypeScript",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salles-g/Minesweeper.git"
+  },
+  "keywords": [
+    "minesweeper",
+    "TypeScript",
+    "JavaScript",
+    "CSS",
+    "game"
+  ],
+  "author": "salles-g",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/salles-g/Minesweeper/issues"
+  },
+  "homepage": "https://github.com/salles-g/Minesweeper#readme",
+  "dependencies": {
+    "typescript": "^4.3.3"
+  }
+}
