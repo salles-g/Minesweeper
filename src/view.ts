@@ -17,9 +17,6 @@ export function displayBoard(board: Array<Array<Tile>>): void {
       boardDiv?.appendChild(element);
     });
   });
-
-  // Set the CSS "--size" variable as the number of rows
-  boardDiv?.style.setProperty("--size", String(board.length));
 }
 
 export function markTile(element: HTMLElement): void {
