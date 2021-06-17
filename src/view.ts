@@ -34,8 +34,10 @@ export function markTile(element: HTMLElement): void {
 
   if (status === TILE_STATUSES.MARKED) {
     element.dataset.status = TILE_STATUSES.HIDDEN;
+    increaseCounter();
   } else {
     element.dataset.status = TILE_STATUSES.MARKED;
+    decreaseCounter();
   }
 }
 
@@ -62,4 +64,23 @@ export function checkEnd(board: Array<Array<Tile>>, tile: Tile): void {
 // Makes it so that no more listeners are called
 function stopProp(e: Event): void {
   e.stopImmediatePropagation();
+}
+
+export function setCounter(mines: number): void {
+  const counter = document.querySelector("#counter > span");
+  if (counter) {
+    counter.textContent = String(mines);
+  }
+}
+function increaseCounter(): void {
+  const counter = document.querySelector("#counter > span");
+  if (counter && counter.textContent) {
+    counter.textContent = String(parseInt(counter.textContent) + 1);
+  }
+}
+function decreaseCounter(): void {
+  const counter = document.querySelector("#counter > span");
+  if (counter && counter.textContent) {
+    counter.textContent = String(parseInt(counter.textContent) - 1);
+  }
 }
