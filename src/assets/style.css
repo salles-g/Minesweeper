@@ -75,3 +75,14 @@ body {
 #board > [data-status="marked"] {
   background-color: yellow;
 }
+
+/* "placeholder" while I don't add actual icons */
+#board > [data-status="marked"]::after {
+  content: "!";
+  transform: translate(-140%, 0);
+}
+#board > [data-status="mine"]::after {
+  content: "💣";
+  font-size: .75em;
+  transform: translate(-45%, -5%);
+}
