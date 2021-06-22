@@ -1,4 +1,4 @@
-import { checkWin, checkLose, TILE_STATUSES, Board } from "./model.js";
+import { TILE_STATUSES, Board } from "./model.js";
 import { Tile } from "./components/Tile.js";
 import { addListeners } from "./controller.js";
 
@@ -46,31 +46,6 @@ export function markTile(board: Board, tile: Tile): void {
 
     decreaseCounter();
   }
-}
-
-export function checkEnd(board: Board, tile: Tile): void {
-  const boardElement = document.getElementById("board");
-  const counter = document.getElementById("counter") ?? document.createElement("div");
-  const lose = checkLose(tile);
-  const win = checkWin(board);
-
-  if (win || lose) {
-    boardElement?.addEventListener("click", stopProp, {capture: true});
-    boardElement?.addEventListener("contextmenu", stopProp, {capture: true});
-  }
-
-  if (win) {
-    counter.textContent = "You win!";
-  }
-
-  if (lose) {
-    counter.textContent = "You lose...";
-  }
-}
-
-// Makes it so that no more listeners are called
-function stopProp(e: Event): void {
-  e.stopImmediatePropagation();
 }
 
 export function setCounter(mines: number): void {

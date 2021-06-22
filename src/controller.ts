@@ -1,6 +1,6 @@
-import { Board, TILE_STATUSES } from "./model.js";
+import { Board, checkEnd, TILE_STATUSES } from "./model.js";
 import { Tile } from "./components/Tile.js";
-import { checkEnd, markTile } from "./view.js";
+import { markTile } from "./view.js";
 
 export function revealTile(board: Board, tile: Tile): void {
   const element = tile.element;
@@ -33,7 +33,7 @@ export function revealTile(board: Board, tile: Tile): void {
     adjacentTiles.forEach(tile => revealTile(board, tile));
   }
 
-  checkEnd(board, tile);
+  checkEnd(board);
 }
 
 // check tiles in a 3x3 area, with the given tile as the center
