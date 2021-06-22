@@ -1,28 +1,29 @@
-import { checkWin, checkLose, TILE_STATUSES } from "./model.js";
+import { checkWin, checkLose, TILE_STATUSES, Board } from "./model.js";
 import { Tile } from "./components/Tile.js";
 import { addListeners } from "./controller.js";
 
-export function displayBoard(board: Array<Array<Tile>>): void {
+export function displayBoard(board: Board): void {
   const boardDiv = document.getElementById("board");
+  const tileCollection = board.tileCollection;
 
   // for each row of the board
-  board.forEach(row => {
+  tileCollection.forEach(row => {
     // for each tile of the row
     row.forEach(tile => {
-      const element = tile.element;
 
       // add both left-click and right-click event listeners
-      addListeners(board, element, tile);
+      addListeners(board, tile);
       
-      boardDiv?.appendChild(element);
+      boardDiv?.appendChild(tile.element);
     });
   });
 
   // Set the CSS "--size" variable as the number of rows
-  boardDiv?.style.setProperty("--size", String(board.length));
+  boardDiv?.style.setProperty("--size", String(tileCollection.length));
 }
 
-export function markTile(element: HTMLElement): void {
+export function markTile(board: Board, tile: Tile): void {
+  const element = tile.element;
   const status = element.dataset.status;
   // if the tile is neither hidden nor marked, i.e., if it's been revealed, return
   if (
@@ -34,14 +35,20 @@ export function markTile(element: HTMLElement): void {
 
   if (status === TILE_STATUSES.MARKED) {
     element.dataset.status = TILE_STATUSES.HIDDEN;
+
+    if (tile.status === TILE_STATUSES.MINE) board.markedMines--;
+
     increaseCounter();
   } else {
     element.dataset.status = TILE_STATUSES.MARKED;
+
+    if (tile.status === TILE_STATUSES.MINE) board.markedMines++; 
+
     decreaseCounter();
   }
 }
 
-export function checkEnd(board: Array<Array<Tile>>, tile: Tile): void {
+export function checkEnd(board: Board, tile: Tile): void {
   const boardElement = document.getElementById("board");
   const counter = document.getElementById("counter") ?? document.createElement("div");
   const lose = checkLose(tile);

@@ -7,11 +7,21 @@ export const TILE_STATUSES = {
   MARKED: "marked"
 };
 
-export function createBoard(size: number, mines: number): Array<Array<Tile>> {
+export type Board = {
+  size: number,
+  mines: number,
+  markedMines: number,
+  markedSafeTiles: number,
+  tileCollection: Array<Array<Tile>>
+};
+
+export function createBoard(size: number, mines: number): Board {
   if (mines >= size*size) throw new Error("Too many mines.");
 
   const minePositions = getMinePositions(size, mines);
-  const board: Array<Array<Tile>> = [];
+  const tileCollection: Array<Array<Tile>> = [];
+  const markedMines = 0;
+  const markedSafeTiles = 0;
 
   for (let rowCoord = 0; rowCoord < size; rowCoord++) {
     const row: Array<Tile> = [];
@@ -25,10 +35,16 @@ export function createBoard(size: number, mines: number): Array<Array<Tile>> {
 
       row.push(tile);
     }
-    board.push(row);
+    tileCollection.push(row);
   }
 
-  return board;
+  return {
+    size,
+    mines,
+    markedMines,
+    markedSafeTiles,
+    tileCollection
+  };
 }
 
 function getMinePositions(size: number, mines: number) {
@@ -56,23 +72,9 @@ function positionMatch(a: any, b: any): boolean {
   return a.x === b.x && a.y === b.y;
 }
 
-export function checkWin(board: Array<Array<Tile>>): boolean {
-  let revealedTiles = 0;
-  let numberOfTiles = 0;
-
-  // check if every safe tile is revealed
-  board.forEach(row => {
-    row.forEach(tile => {
-      if (tile.status !== TILE_STATUSES.MINE) {
-        if (tile.element.dataset.status === TILE_STATUSES.NUMBER) {
-          revealedTiles++;
-        }
-        numberOfTiles++;
-      }
-    });
-  });
-
-  return revealedTiles === numberOfTiles;
+export function checkWin(board: Board): boolean {
+  const numberOfSafeTiles = Math.pow(board.size, 2) - board.mines;
+  return board.markedSafeTiles === numberOfSafeTiles;
 }
 
 export function checkLose(tile: Tile): boolean {
