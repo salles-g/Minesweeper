@@ -12,7 +12,6 @@ export class Tile {
     this.status = TILE_STATUSES.HIDDEN;
 
     this.element = document.createElement("div");
-    this.element.classList.add("tile");
     this.element.dataset.status = this.status;
     this.element.textContent = " ";
   }

@@ -71,25 +71,3 @@ function getMinePositions(size: number, mines: number) {
 function positionMatch(a: any, b: any): boolean {
   return a.x === b.x && a.y === b.y;
 }
-
-export function checkEnd(board: Board): void {
-  const win = checkWin(board);
- 
-  // Makes it so that no more listeners are called
-  function stopProp(e: Event): void {
-    e.stopImmediatePropagation();
-  }
-
-  if (win) {
-    const boardElement = document.getElementById("board");
-    const counter = document.getElementById("counter") ?? document.createElement("div");
-    boardElement?.addEventListener("click", stopProp, {capture: true});
-    boardElement?.addEventListener("contextmenu", stopProp, {capture: true});
-    counter.textContent = "You win!";
-  }
-}
-
-export function checkWin(board: Board): boolean {
-  const numberOfSafeTiles = Math.pow(board.size, 2) - board.mines;
-  return board.markedSafeTiles === numberOfSafeTiles;
-}

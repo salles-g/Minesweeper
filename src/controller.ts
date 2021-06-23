@@ -1,8 +1,8 @@
-import { Board, checkEnd, TILE_STATUSES } from "./model.js";
+import { Board, TILE_STATUSES } from "./model.js";
 import { Tile } from "./components/Tile.js";
 import { markTile } from "./view.js";
 
-export function revealTile(board: Board, tile: Tile): void {
+function revealTile(board: Board, tile: Tile): void {
   const element = tile.element;
 
   // if tile is marked
@@ -14,7 +14,7 @@ export function revealTile(board: Board, tile: Tile): void {
   // if given tile is a mine
   if (tile.status === TILE_STATUSES.MINE) {
     element.dataset.status = TILE_STATUSES.MINE;
-    return endGame();
+    return loseGame();
   }
 
   element.dataset.status = TILE_STATUSES.NUMBER;
@@ -33,7 +33,7 @@ export function revealTile(board: Board, tile: Tile): void {
     adjacentTiles.forEach(tile => revealTile(board, tile));
   }
 
-  checkEnd(board);
+  checkWin(board);
 }
 
 // check tiles in a 3x3 area, with the given tile as the center
@@ -67,13 +67,32 @@ export function addListeners(board: Board, tile: Tile): void {
 
 const endGame = () => {
   const boardElement = document.getElementById("board");
-  const counter = document.getElementById("counter") ?? document.createElement("div");
-
+  
+  // make it so that no more listeners are called
   const stopProp = (e: Event): void => {
     e.stopImmediatePropagation();
   }
-
+  
   boardElement?.addEventListener("click", stopProp, {capture: true});
   boardElement?.addEventListener("contextmenu", stopProp, {capture: true});
+}
+
+const winGame = () => {
+  endGame();
+  const counter = document.getElementById("counter") ?? document.createElement("div");
+  counter.textContent = "You win!";  
+}
+
+const loseGame = () => {
+  endGame();
+  const counter = document.getElementById("counter") ?? document.createElement("div");
   counter.textContent = "You lose...";
+}
+
+function checkWin(board: Board): void {
+  const numberOfSafeTiles = Math.pow(board.size, 2) - board.mines;
+  const won = board.markedSafeTiles === numberOfSafeTiles;
+  if (won) {
+    return winGame();
+  }
 }
