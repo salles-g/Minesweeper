@@ -75,6 +75,7 @@ const endGame = () => {
   
   boardElement?.addEventListener("click", stopProp, {capture: true});
   boardElement?.addEventListener("contextmenu", stopProp, {capture: true});
+  boardElement?.style.setProperty("--tile-cursor", "default");
 }
 
 const winGame = () => {

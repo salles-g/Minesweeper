@@ -63,7 +63,7 @@ body {
 #board > [data-nearby="8"] { color: gray; }
 
 #board > [data-status="hidden"] {
-  cursor: pointer;
+  cursor: var(--tile-cursor);
 }
 #board > [data-status="number"] {
   border: 1px solid #777;

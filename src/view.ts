@@ -20,6 +20,9 @@ export function displayBoard(board: Board): void {
 
   // Set the CSS "--size" variable as the number of rows
   boardDiv?.style.setProperty("--size", String(tileCollection.length));
+
+  // make the "--tile-cursor" a pointer
+  boardDiv?.style.setProperty("--tile-cursor", "pointer");
 }
 
 export function markTile(board: Board, tile: Tile): void {
