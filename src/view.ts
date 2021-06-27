@@ -2,6 +2,12 @@ import { TILE_STATUSES, Board } from "./model.js";
 import { Tile } from "./components/Tile.js";
 import { addListeners } from "./controller.js";
 
+/**
+ * Displays the board on the webpage
+ * 
+ * @param { Board } board - A board object
+ * @returns { void }
+ */
 export function displayBoard(board: Board): void {
   const boardDiv = document.getElementById("board");
   const tileCollection = board.tileCollection;
@@ -25,6 +31,14 @@ export function displayBoard(board: Board): void {
   boardDiv?.style.setProperty("--tile-cursor", "pointer");
 }
 
+
+/**
+ * Marks a tile with a flag
+ * 
+ * @param { Board } board - A board object
+ * @param { Tile } tile - An object of the Tile class
+ * @returns { void }
+ */
 export function markTile(board: Board, tile: Tile): void {
   const element = tile.element;
   const status = element.dataset.status;
@@ -51,18 +65,27 @@ export function markTile(board: Board, tile: Tile): void {
   }
 }
 
+
+/**
+ * Sets the counter to the number of remaining mines
+ * 
+ * @param { number } mines - The amount of mines remaining
+ * @returns { void }
+ */
 export function setCounter(mines: number): void {
   const counter = document.querySelector("#counter > span");
   if (counter) {
     counter.textContent = String(mines);
   }
 }
+
 function increaseCounter(): void {
   const counter = document.querySelector("#counter > span");
   if (counter && counter.textContent) {
     counter.textContent = String(parseInt(counter.textContent) + 1);
   }
 }
+
 function decreaseCounter(): void {
   const counter = document.querySelector("#counter > span");
   if (counter && counter.textContent) {
