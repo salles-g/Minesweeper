@@ -1,4 +1,4 @@
 # Minesweeper
 Just a simple minesweeper game with TypeScript with customizeable board size.
 
-![screenshot](https://user-images.githubusercontent.com/82478213/126030238-5548e111-645b-4110-bbcc-39c2950101c6.png)
+![screenshot](https://user-images.githubusercontent.com/82478213/126046957-363f3df8-e415-495a-8ba0-bc916d060f85.png)
