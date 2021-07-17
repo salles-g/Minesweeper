@@ -4,9 +4,7 @@
   "description": "Simple minesweeper game with TypeScript",
   "main": "index.ts",
   "scripts": {
-    "start": "node dist/index.js",
-    "build": "tsc",
-    "postinstall": "npm run build"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
